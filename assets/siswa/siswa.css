@@ -1,0 +1,172 @@
+/* just flexbox */
+/* navigae flexbox */
+
+@font-face {
+  font-family: appFont;
+  src: url(../font/JosefinSans-Regular.ttf);
+}
+
+@font-face {
+  font-family: appPages;
+  src: url(../font/ColabBol.otf);
+}
+
+*{
+	font-family: appFont;
+}
+
+body{
+	padding: 0;
+	padding-top: 50px;
+	margin: 0;
+}
+
+.title{
+	display: inline-block;
+	font-size: 25px;
+	padding: 10px 10px;
+	color: white;
+}
+
+/*  */
+.menu-fixed-top{
+	position: fixed;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	height: fit-content;
+	top: 0;
+	background: green;
+	min-height: 50px;
+}
+
+.nav-title{
+	display: inline-block;
+	width: fit-content;
+	height: fit-content;
+}
+
+.nav-menu{
+	list-style: none;
+	display: inline-block;
+	width: fit-content;
+	height: fit-content;
+	padding: 10px;	
+}
+
+.nav-menu li{
+	display: inline-block;
+}
+
+.nav-menu li a{
+	display: block;
+ 	text-decoration: none;
+ 	color: white;
+ 	margin: 0 10px;
+}
+
+@media screen and (min-width: 600px){
+	.mobile-menu{
+		display: none;
+	}
+}
+@media screen and (max-width: 600px){
+	.nav-menu{
+		display: none;
+	}
+
+}
+
+.mobile-menu a{
+	display: inline-block;
+	padding: 10px 20px;
+	font-size: 25px;
+	color: white;
+}
+
+.pull-right{
+	float: right;
+}
+
+/* mobile menu */
+
+.mobile-nav{
+	position: fixed;
+	display: none;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: green;
+	justify-content: center;
+	align-items: center;
+	overflow-y: auto;
+}
+
+.nav-menu-mobile{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.nav-menu-mobile a{
+	display: block;
+	color: white;
+	text-decoration: none;
+	padding: 10px 0;
+	font-size: 20px;
+	font-weight: 400;
+	text-align: center;
+}
+
+.btn-close-menu{
+	position: fixed;
+	font-size: 30px;
+	top: 0;
+	right: 0;
+	margin: 10px;
+	color: white;
+}
+.padding-10{
+	padding: 16px;
+}
+
+/* --------- card ---------- */
+
+.card{
+	margin: 10px;
+	padding: 16px;
+	margin-top: 15px;
+	box-shadow: 0 0 3px #ddd;
+	background-color: #ffffff;
+}
+
+.card img{
+	width: 100%;
+}
+
+.card-title{
+	font-size: 1.2em;
+	font-weight: 800;
+}
+
+.card-body{
+	font-size: 1em;
+	padding: 10px 0;
+}
+
+.side-menu{
+	padding: 10px;
+}
+
+.btn{
+	width: 100%;
+	padding: 10px;
+	margin: 5px;
+	outline: none;
+	background-color: #fff;
+}
+
+.btn-active{
+	background-color: green;
+	color: white;
+}
