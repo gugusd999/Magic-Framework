@@ -14,14 +14,13 @@
 	<script src="<?= $this->base_link(); ?>assets/datatable/dataTables.bootstrap.min.js"></script>
 <body>
     <div class="jumbotron text-center">
-    	<h1>CONTOH CRUD</h1>
+    	<h1>welcome to home</h1>
     </div>
-
-	<div class="container-fluid">
+    <div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
 				<h1>Contoh Datatable</h1>
-				<a class="btn btn-primary" href="<?= $this->site_link('dashboard/tambah'); ?>">Tambah Data</a>
+				<a class="btn btn-primary" href="<?= $this->site_link('home/tambah'); ?>">Tambah Data</a>
 				<br>
 				<br>
 				<!-- maaf karna dia retur htmml harus menggunakan echo :) -->
@@ -37,7 +36,7 @@
 						),
 						"mytable",
 						"table table-bordered",
-						$this->site_link('dashboard/show'),
+						$this->site_link('home/show'),
 						array(0,3)
 					);
 		    	 ?>

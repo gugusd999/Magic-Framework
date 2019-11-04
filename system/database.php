@@ -21,17 +21,132 @@ class Database extends Settings{
         }
     }
 
+
     public function getDepartment(){
         return mysqli_connect($this->host, $this->user, $this->pass, $this->db);
+    }
+
+    public function dbquery($qr, $type=""){
+        $getConnection = $this->getDepartment();
+        $query = mysqli_query($getConnection, $qr);
+        $box = [];
+        while ($data = mysqli_fetch_object($query) ) {
+            $box[] = $data;
+        }
+        if ($type == "count") {
+            return count($box);
+        }else{
+            return $box;
+        }
+    }
+
+    public function getColumnName($table, $row){
+        $data = $this->dbquery("
+            SELECT
+                COLUMN_NAME as nama_kolom
+            FROM
+                information_schema. COLUMNS
+            WHERE
+                TABLE_SCHEMA = '".$this->db."'
+            AND TABLE_NAME = '".$table."'
+            AND ORDINAL_POSITION = ".$row."
+        ");
+        $nama = "";
+        foreach ($data as $key => $value) {
+            $nama .= $value->nama_kolom;
+        }
+
+        return $nama;
+    }
+
+    public function ArrColumnName($table){
+        $data = $this->dbquery("
+            SELECT
+                COLUMN_NAME as nama_kolom
+            FROM
+                information_schema. COLUMNS
+            WHERE
+                TABLE_SCHEMA = '".$this->db."'
+                AND TABLE_NAME = '".$table."'
+        ");
+        $nama = array();
+        foreach ($data as $key => $value) {
+            $nama[] = $value->nama_kolom;
+        }
+
+        return $nama;
+    }
+
+    public function cekColumn($table, $row){
+        return $this->dbquery("
+            SELECT
+                COLUMN_NAME as nama_kolom
+            FROM
+                information_schema. COLUMNS
+            WHERE
+                TABLE_SCHEMA = '".$this->db."'
+            AND TABLE_NAME = '".$table."'
+            AND ORDINAL_POSITION = ".$row."
+        ", "count");
     }
 
     public function cekTable($table, $tablestruktur){
         $getConnection = $this->getDepartment();
         $query = mysqli_query($getConnection, "DESCRIBE $table ");
         if ($query) {
+
+            $aa = $this->ArrColumnName($table);
+            $bb = array_keys($tablestruktur);
+
+            if (count($aa) > count($bb)) {
+                foreach ($aa as $ay => $ax) {
+                    if (in_array($ax, $bb)) {
+                    }else{
+                        $this->query("
+                            ALTER TABLE ".$table."
+                            DROP COLUMN ".$ax.";
+                        ");
+                    }
+                }
+            }else{
+                $no = 1;
+                foreach ($tablestruktur as $key => $value) {
+                    if ($this->cekColumn($table, $no) == 0) {
+                        $this->query("
+                            
+                            ALTER TABLE ".$table."
+                            ADD ".$key." ".$value.";
+
+                        ");
+                    }else{
+                        if ($this->getColumnName($table, $no) != $key) {
+                            $this->query("
+                            
+                                ALTER TABLE ".$table."
+                                CHANGE COLUMN ".$this->getColumnName($table, $no)." ".$key." ".$value.";
+
+                            ");
+                        }
+                    }
+                    $no++;
+                }
+            }
+
             return 'tersedia';
         }else{
-            $createtable = mysqli_query($getConnection, 'CREATE TABLE '.$table.' ('.$tablestruktur.') ');
+
+            $mystructure = "";
+
+            $no = 0;
+            foreach ($tablestruktur as $key => $value) {
+                if ($no == 0) {
+                    $mystructure .= $key.' '.$value;
+                }else{
+                    $mystructure .= ','.$key.' '.$value;
+                }
+                $no++;
+            }
+            $createtable = mysqli_query($getConnection, 'CREATE TABLE '.$table.' ('.$mystructure.') ');
             if ($createtable) {
                 return 'dibuat';
             }else{

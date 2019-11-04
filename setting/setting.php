@@ -8,7 +8,7 @@
 class Settings
 {
 	// namaApps sama dengan nama Folder
-	public $namaApss = "Magic-Framework";
+	public $namaApss = "Magic/Magic-Framework";
 	// set yuo host ................:
 	public $host = "localhost";
 	// set yuo username ................:
@@ -24,7 +24,7 @@ class Settings
 
 // setting pages for first load ......................//
 // data string
-$getClass = "dashboard";
+$getClass = "home";
 // data string
 $getFunction = "index";
 // data array

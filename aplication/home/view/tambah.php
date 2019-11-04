@@ -20,27 +20,29 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
-				<h1>Contoh Datatable</h1>
-				<a class="btn btn-primary" href="<?= $this->site_link('dashboard/tambah'); ?>">Tambah Data</a>
-				<br>
-				<br>
-				<!-- maaf karna dia retur htmml harus menggunakan echo :) -->
-				<?= 
+				<h1>Tambah Data</h1>
+				<hr>
+			</div>
+			<div class="col-sm-8 col-sm-offset-2">
+				<form action="<?= $this->site_link('home/simpan'); ?>" method="post">
+					<div class="form-group">
+						<label for="data1">Data 1</label>
+						<input type="text" id="data1" class="form-control" name="data1" placeholder="inputkan data 1">
+					</div>
+					<div class="form-group">
+						<label for="data2">Data 2</label>
+						<input type="text" id="data2" class="form-control" name="data2" placeholder="inputkan data 2">
+					</div>
+					<div class="form-group">
+						<label for="data3">Data 3</label>
+						<input type="text" id="data3" class="form-control" name="data3" placeholder="inputkan data 3">
+					</div>
+					<div class="form-group">
 
-					$this->createTable(
-						array(
-							"no",
-							"data1",
-							"data2",
-							"data3",
-							"action"
-						),
-						"mytable",
-						"table table-bordered",
-						$this->site_link('dashboard/show'),
-						array(0,3)
-					);
-		    	 ?>
+						<a type="submit" href="<?= $this->site_link('dashboard'); ?>" class="btn btn-default">kembali</a>
+						<button type="submit" class="btn btn-success">simpan</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
