@@ -8,10 +8,10 @@ class Magic extends Database
 	public function test(){
 		echo "string";
 	}
+	
 	public function getPages($lokasi,$a, $data = ""){
     	require 'application/'.$lokasi.'/view/'.$a.'.php';
     }
-
 
     function encript($a){
     	$key1 = md5($this->encryp);

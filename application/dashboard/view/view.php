@@ -24,7 +24,6 @@
 				<a class="btn btn-primary" href="<?= $this->site_link('dashboard/tambah'); ?>">Tambah Data</a>
 				<br>
 				<br>
-				<!-- maaf karna dia retur htmml harus menggunakan echo :) -->
 				<?= 
 
 					$this->createTable(

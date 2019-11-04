@@ -84,6 +84,7 @@ class dashboard extends Magic
 
 	// nah ok show ini adalah cara menampilkan datatablenya
 	// trus gimana gunainnya anda cuma harus merubah beberapa saja
+	
 	function show(){
 		// nama table
 		$table = $this->table_saya;

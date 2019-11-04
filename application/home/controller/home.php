@@ -14,7 +14,7 @@ class home extends Magic
 			"id" => "INT(11) AUTO_INCREMENT PRIMARY KEY",
 			"data1" => "VARCHAR(255)",
 			"data2" => "VARCHAR(255)",
-			"data3" => "VARCHAR(255)",
+			"keterangan" => "VARCHAR(255)",
 		);
 
 		// cek table 2 paramater namatable dan struktur table
@@ -31,8 +31,8 @@ class home extends Magic
 		$table = $this->table_saya;
 		
 		$search = $_POST["search"]["value"];
-		$table_row = array('id', 'data1', 'data2', 'data3');
-		$dataColumn = array(false,"data1","data2", 'data3');
+		$table_row = array('id', 'data1', 'data2', 'keterangan');
+		$dataColumn = array(false,"data1","data2", 'keterangan');
 		// sql like db digunakan untuk pencarian table atau filter table rumus ini saya tanamkan di database class
 		$table_row_data = $this->sql_like_table($table_row, $search);
 
@@ -52,7 +52,7 @@ class home extends Magic
 				$no,
 				$value->data1,
 				$value->data2,
-				$value->data3,
+				$value->keterangan,
 				'<a href="'.$this->site_link('home/edit/'.$value->id).'" class="btn btn-success edit">edit</a> 
 				<a href="'.$this->site_link('home/hapus/'.$value->id).'" class="btn btn-danger edit">hapus</a>'
 			));
@@ -78,7 +78,7 @@ class home extends Magic
 		$arr = array(
 			"data1" => $_POST['data1'],
 			"data2" => $_POST['data2'],
-			"data3" => $_POST['data3']
+			"keterangan" => $_POST['data3']
 		);
 
 		var_dump($arr);
@@ -99,7 +99,7 @@ class home extends Magic
 		$arr = array(
 			"data1" => $_POST['data1'],
 			"data2" => $_POST['data2'],
-			"data3" => $_POST['data3']
+			"keterangan" => $_POST['data3']
 		);
 
 		$go = array(

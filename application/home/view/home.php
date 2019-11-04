@@ -29,10 +29,10 @@
 					$this->createTable(
 						array(
 							"no",
-							"data1",
-							"data2",
-							"data3",
-							"action"
+							"Nama",
+							"Profesi",
+							"Keterangan",
+							"#"
 						),
 						"mytable",
 						"table table-bordered",
