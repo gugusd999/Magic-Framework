@@ -9,7 +9,7 @@ class Magic extends Database
 		echo "string";
 	}
 	public function getPages($lokasi,$a, $data = ""){
-    	require 'aplication/'.$lokasi.'/view/'.$a.'.php';
+    	require 'application/'.$lokasi.'/view/'.$a.'.php';
     }
 
 
@@ -61,7 +61,7 @@ class Magic extends Database
 
     function templates($lokasi, $template , $lokasiHalaman="", $halaman = "", $data = "")
     {
-    	require 'aplication/'.$lokasi.'/view/'.$template.'.php'; 
+    	require 'application/'.$lokasi.'/view/'.$template.'.php'; 
     }
 
     function helper($a){

@@ -28,7 +28,7 @@ if (isset($_GET['key'])) {
 	}
 }
 
-include_once 'aplication/'.$getClass.'/controller/'.$getClass.'.php';
+include_once 'application/'.$getClass.'/controller/'.$getClass.'.php';
 
 $x = $getClass;
 $a = new $x();

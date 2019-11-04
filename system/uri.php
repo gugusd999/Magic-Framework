@@ -28,7 +28,7 @@ if (isset($_GET['key'])) {
 	}
 }
 
-require_once 'aplication/'.$getClass.'/controller/'.$getClass.'.php';
+require_once 'application/'.$getClass.'/controller/'.$getClass.'.php';
 
 // --------------------- the action for get it data from URI ---------------//
 
