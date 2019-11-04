@@ -2,15 +2,14 @@
 
 require_once 'database.php';
 
-class Magic extends Database
-{
+class Magic extends Database{
 	
 	public function test(){
 		echo "string";
 	}
 	
 	public function getPages($lokasi,$a, $data = ""){
-    	require 'application/'.$lokasi.'/view/'.$a.'.php';
+    	require 'application/modules/'.$lokasi.'/view/'.$a.'.php';
     }
 
     function encript($a){
@@ -61,12 +60,7 @@ class Magic extends Database
 
     function templates($lokasi, $template , $lokasiHalaman="", $halaman = "", $data = "")
     {
-    	require 'application/'.$lokasi.'/view/'.$template.'.php'; 
-    }
-
-    function helper($a){
-    	include_once 'helper/'.$a.'.php';
-		return new $a;
+    	require 'application/modules/'.$lokasi.'/view/'.$template.'.php'; 
     }
 
     function session(){
@@ -80,6 +74,12 @@ class Magic extends Database
 			return "false";
 		}
 	}
+
+	function load(){
+		require_once 'system/load.php';
+		return new load;
+	}
+
 
 	function createTable($dataTable = array(), $id="", $class="", $link="", $tableShort = array()){
     	
@@ -158,9 +158,4 @@ function redirect($a){
 	$getNameApp = $data->namaApss;
 	$theLink = $getProtokol.$getHost.'/'.$getNameApp.'/index.php?key='.$a;
 	header("location: $theLink ");
-}
-
-
-function templater($templater){
-	include_once 'templater/'.$templater.'.php';
 }

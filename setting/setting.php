@@ -24,7 +24,7 @@ class Settings
 
 // setting pages for first load ......................//
 // data string
-$getClass = "home";
+$getClass = "Wellcome";
 // data string
 $getFunction = "index";
 // data array

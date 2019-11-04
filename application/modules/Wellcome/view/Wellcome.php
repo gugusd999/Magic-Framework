@@ -1,0 +1,1 @@
+test for checking function ok or not
