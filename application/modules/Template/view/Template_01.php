@@ -77,7 +77,7 @@
 	<div class="grid-items padding-16">
 		<?php $this->getPages($lokasiHalaman, $halaman, $data); ?>
 	</div>
-	<div class="grid-items bg-black shadow flex-center">create by gugus darmayanto | ggsd09031997@gmail.com | WA: 0858-000000044
+	<div class="grid-items bg-black shadow flex-center">create by gugus darmayanto | ggsd09031997@gmail.com | WA: 0858-0045-5338
 	</div>
 
 </body>
