@@ -2,7 +2,7 @@
 
 require_once 'setting/setting.php';
 
-class Database extends Settings{
+class Database extends Settings {
     
     public function cekDatbase(){
         $conn = mysqli_connect($this->host, $this->user, $this->pass);

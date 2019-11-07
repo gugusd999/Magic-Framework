@@ -1,0 +1,173 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+@font-face {
+    font-family: "ColabBol";
+    src: url('../font/ColabBol.otf');
+}
+
+@font-face {
+    font-family: "josefin";
+    src: url('../font/JosefinSans-Regular.ttf');
+}
+
+
+
+.container-grid .grid-items:nth-child(1){
+    grid-area: header;
+}
+
+.container-grid .grid-items:nth-child(2){
+    grid-area: menu;
+    overflow-y: auto; 
+}
+
+.container-grid .grid-items:nth-child(3){
+    grid-area: content;
+    overflow-y: auto;
+}
+
+.container-grid .grid-items:nth-child(4){
+    grid-area: footer;
+}
+
+.container-grid{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 250px calc(100% - 250px);
+    grid-template-rows: 50px calc(100% - 100px) 50px;
+    grid-template-areas: 
+        "header header header header"
+        "menu content content content"
+        "footer footer footer footer"
+        ;
+}
+
+.bg-black{
+    background-color: black;
+    color: white;
+}
+
+.bg-silver{
+    background-color: silver;
+}
+
+.shadow{
+    box-shadow: 0 0 5px #999;
+}
+
+.flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.padding-10{
+    padding: 10px;
+}
+
+.padding-20{
+    padding: 20px;
+}
+
+.no-list{
+    list-style: none;
+}
+
+.block{
+    display: block;
+}
+
+.inline-block{
+    display: inline-block;
+}
+
+.no-decoration{
+    text-decoration: none;
+}
+
+.elipsis-text{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nav-menu{
+    list-style: none;
+}
+.nav-menu .active a{
+    background-color: purple;
+    color: white;
+}
+
+.nav-menu a{
+    display: block;
+    padding: 10px 3px;
+    text-decoration: none;
+    background-color: #fafafa;
+    border-bottom: 1px solid #aaaaaa;
+    color: #333;
+}
+.nav-menu a:hover{
+    background-color: purple;
+    color: white;
+}
+
+.title{
+    font-size: 25px;
+}
+
+.grid-1
+,.grid-3{
+    display: grid;
+    grid-template-columns: 100%;
+}
+
+@media screen and (min-width: 800px){
+    .grid-3{
+        grid-template-columns: 50% 50%;
+    }    
+}
+
+@media screen and (min-width: 1000px){
+    .grid-3{
+        grid-template-columns: calc(100% / 3) calc(100% / 3) calc(100% / 3);
+    }    
+}
+
+.card-green{
+    font-family: josefin;
+    height: 100%;
+    padding: 10px;
+    background-color: green;
+    box-shadow: 0 0 5px #333;
+    color: white;
+}
+
+.card-blue{
+    font-family: josefin;
+    height: 100%;
+    padding: 10px;
+    background-color: lightblue;
+    box-shadow: 0 0 5px #333;
+}
+
+.card-yellow{
+    font-family: josefin;
+    height: 100%;
+    padding: 10px;
+    background-color: yellow;
+    box-shadow: 0 0 5px #333;
+}
+
+.padding-16{
+    padding: 16px;
+}
+
+.margin-top-20{
+    margin-top: 20px;
+}

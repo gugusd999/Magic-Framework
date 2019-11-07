@@ -8,15 +8,15 @@
 class Settings
 {
 	// namaApps sama dengan nama Folder
-	public $namaApss = "Magic/Magic-Framework";
+	public $namaApss = "magic-framework";
 	// set yuo host ................:
 	public $host = "localhost";
 	// set yuo username ................:
     public $user = "root";
 	// set yuo password ................:
-    public $pass = "";
+    public $pass = "password";
 	// set yuo database ................:
-    public $db = "CatatanKeuanganGugus";
+    public $db = "Magic";
     // encripsi
     public $encryp = "awesomeframeworkwithgugus";
 }

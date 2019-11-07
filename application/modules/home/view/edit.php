@@ -24,7 +24,7 @@
 				<hr>
 			</div>
 			<div class="col-sm-8 col-sm-offset-2">
-				<?php $dapatkan_data =  $this->query_result_object_row('SELECT * FROM contoh WHERE id = "'.$data['id'].'"'); ?>
+				<?php $dapatkan_data =  $this->db()->query_result_object_row('SELECT * FROM contoh WHERE id = "'.$data['id'].'"'); ?>
 				<form action="<?= $this->site_link('home/update'); ?>" method="post">
 					<div class="form-group">
 						<label for="data1">Data 1</label>
@@ -37,7 +37,7 @@
 					</div>
 					<div class="form-group">
 						<label for="data3">Data 3</label>
-						<input type="text" id="data2" class="form-control" value="<?= $dapatkan_data->keterangan ?>" name="data3" placeholder="inputkan data 3">
+						<input type="text" id="data2" class="form-control" value="<?= $dapatkan_data->keterangan ?>" name="keterangan" placeholder="inputkan data 3">
 					</div>
 					<div class="form-group">
 						<a type="submit" href="<?= $this->site_link('home'); ?>" class="btn btn-default">kembali</a>

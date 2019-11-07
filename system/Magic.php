@@ -1,8 +1,8 @@
 <?php 
 
-require_once 'database.php';
+require_once 'system/database.php';
 
-class Magic extends Database{
+class Magic extends Settings{
 	
 	public function test(){
 		echo "string";
@@ -80,6 +80,10 @@ class Magic extends Database{
 		return new load;
 	}
 
+	function db(){
+		return new Database;
+	}
+
 
 	function createTable($dataTable = array(), $id="", $class="", $link="", $tableShort = array()){
     	
@@ -125,23 +129,32 @@ class Magic extends Database{
 		        </tbody>
 		    </table>
 		    <script>
-		    	$("#'.$id.'").dataTable({
-			        scrollX: true,
-			        scrollY: true,
-			        processing: true,
-			        serverSide: true,
-			        order: [],
-			        ajax: {
-			            "url"       : "'.$link.'",
-			            "type"      : "POST"
-			        },
-			        columnDefs:[
-			        	{
-			        		targets:['.$tablenyash.'],
-			        		orderable: false
-			        	}
-			        ]
-			    })
+				
+				var '.$id.' = null;
+
+				$(document).ready(function(){
+			    	'.$id.' = $("#'.$id.'").DataTable({
+
+				        scrollX: true,
+				        scrollY: true,
+				        processing: true,
+				        serverSide: true,
+				        order: [],
+				        ajax: {
+				            "url"       : "'.$this->site_link($link.'/show').'",
+				            "type"      : "POST"
+				        },
+				        deferRender: true,
+				        columnDefs:[
+				        	{
+				        		targets:['.$tablenyash.'],
+				        		orderable: false
+				        	}
+				        ]
+				    })
+				});
+
+
 		    </script>
 
     	';

@@ -114,7 +114,7 @@ class dashboard extends Magic
 				$value->data2,
 				$value->data3,
 				'<a href="'.$this->site_link('dashboard/edit/'.$value->id).'" class="btn btn-success edit">edit</a> 
-				<a href="'.$this->site_link('dashboard/hapus/'.$value->id).'" class="btn btn-danger edit">hapus</a>'
+				<a data-id="'.$value->id.'" class="btn btn-danger hapus">hapus</a>'
 			));
 		}
 

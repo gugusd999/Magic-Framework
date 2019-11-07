@@ -30,18 +30,19 @@ $b = $getFunction;
 $c = $getParams;
 
 
+$ckdbn = new Settings;
 
-
-
-
-$loadApps = new Database();
-
-$loadAppsCek = $loadApps->cekDatbase();
-
-if ($loadAppsCek == 'dibuat' || $loadAppsCek == 'tersedia') {
-	call_user_func_array(array($a, $b), $c);
+if ($ckdbn->host != "" && $ckdbn->user != "") {
+	$loadApps = new Database();
+	$loadAppsCek = $loadApps->cekDatbase();
+	if ($loadAppsCek == 'dibuat' || $loadAppsCek == 'tersedia') {
+		call_user_func_array(array($a, $b), $c);
+	}else{
+		echo "anda tidak terhubung ke database";
+	}
 }else{
-	echo "anda tidak terhubung ke database";
+		call_user_func_array(array($a, $b), $c);
 }
+
 
 

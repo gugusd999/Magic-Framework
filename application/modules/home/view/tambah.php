@@ -35,11 +35,11 @@
 					</div>
 					<div class="form-group">
 						<label for="data3">Data 3</label>
-						<input type="text" id="data3" class="form-control" name="data3" placeholder="inputkan data 3">
+						<input type="text" id="data3" class="form-control" name="keterangan" placeholder="inputkan data 3">
 					</div>
 					<div class="form-group">
 
-						<a type="submit" href="<?= $this->site_link('dashboard'); ?>" class="btn btn-default">kembali</a>
+						<a type="submit" href="<?= $this->site_link('home'); ?>" class="btn btn-default">kembali</a>
 						<button type="submit" class="btn btn-success">simpan</button>
 					</div>
 				</form>
