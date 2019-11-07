@@ -38,7 +38,7 @@ if ($ckdbn->host != "" && $ckdbn->user != "") {
 	if ($loadAppsCek == 'dibuat' || $loadAppsCek == 'tersedia') {
 		call_user_func_array(array($a, $b), $c);
 	}else{
-		echo "anda tidak terhubung ke database";
+		include_once 'system/error.php';
 	}
 }else{
 		call_user_func_array(array($a, $b), $c);

@@ -8,7 +8,7 @@
 class Settings
 {
 	// namaApps sama dengan nama Folder
-	public $namaApss = "magic-framework";
+	public $namaApss = "Magic-Framework";
 	// set yuo host ................:
 	public $host = "localhost";
 	// set yuo username ................:
