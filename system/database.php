@@ -2,16 +2,33 @@
 
 require_once 'setting/setting.php';
 
-class Database extends Settings {
+class DB extends Settings {
     
-    public function cekDatbase(){
-        $conn = mysqli_connect($this->host, $this->user, $this->pass);
+
+    public $host;
+    public $user;
+    public $pass;
+    public $db;
+
+
+    public function __construct(){
+        $xx = new Settings;
+        $this->host = $xx->host;
+        $this->user = $xx->user;
+        $this->pass = $xx->pass;
+        $this->db = $xx->db;
+    }
+
+    public static function cekDatbase(){
+
+
+        $conn = mysqli_connect((new self)->host, (new self)->user, (new self)->pass);
         if ($conn) {
-            $cekDb = mysqli_select_db($conn, $this->db);
+            $cekDb = mysqli_select_db($conn, (new self)->db);
             if ($cekDb) {
                 return "tersedia";
             }else{
-                $queryCreateDb = mysqli_query($conn, "CREATE DATABASE ".$this->db);
+                $queryCreateDb = mysqli_query($conn, "CREATE DATABASE ".(new self)->db);
                 if ($queryCreateDb) {
                     return "dibuat";
                 }
@@ -21,13 +38,17 @@ class Database extends Settings {
         }
     }
 
-
-    public function getDepartment(){
-        return mysqli_connect($this->host, $this->user, $this->pass, $this->db);
+    public static function cekd(){
+        echo "string";
     }
 
-    public function dbquery($qr, $type=""){
-        $getConnection = $this->getDepartment();
+
+    public static function getDepartment(){
+        return mysqli_connect((new self)->host, (new self)->user, (new self)->pass, (new self)->db);
+    }
+
+    public static function dbquery($qr, $type=""){
+        $getConnection = (new self)->getDepartment();
         $query = mysqli_query($getConnection, $qr);
         $box = [];
         while ($data = mysqli_fetch_object($query) ) {
@@ -40,14 +61,14 @@ class Database extends Settings {
         }
     }
 
-    public function getColumnName($table, $row){
-        $data = $this->dbquery("
+    public static function getColumnName($table, $row){
+        $data = (new self)->dbquery("
             SELECT
                 COLUMN_NAME as nama_kolom
             FROM
                 information_schema. COLUMNS
             WHERE
-                TABLE_SCHEMA = '".$this->db."'
+                TABLE_SCHEMA = '".(new self)->db."'
             AND TABLE_NAME = '".$table."'
             AND ORDINAL_POSITION = ".$row."
         ");
@@ -59,14 +80,14 @@ class Database extends Settings {
         return $nama;
     }
 
-    public function ArrColumnName($table){
-        $data = $this->dbquery("
+    public static function ArrColumnName($table){
+        $data = (new self)->dbquery("
             SELECT
                 COLUMN_NAME as nama_kolom
             FROM
                 information_schema. COLUMNS
             WHERE
-                TABLE_SCHEMA = '".$this->db."'
+                TABLE_SCHEMA = '".(new self)->db."'
                 AND TABLE_NAME = '".$table."'
         ");
         $nama = array();
@@ -77,32 +98,32 @@ class Database extends Settings {
         return $nama;
     }
 
-    public function cekColumn($table, $row){
-        return $this->dbquery("
+    public static function cekColumn($table, $row){
+        return (new self)->dbquery("
             SELECT
                 COLUMN_NAME as nama_kolom
             FROM
                 information_schema. COLUMNS
             WHERE
-                TABLE_SCHEMA = '".$this->db."'
+                TABLE_SCHEMA = '".(new self)->db."'
             AND TABLE_NAME = '".$table."'
             AND ORDINAL_POSITION = ".$row."
         ", "count");
     }
 
-    public function cekTable($table, $tablestruktur){
-        $getConnection = $this->getDepartment();
+    public static function cekTable($table, $tablestruktur){
+        $getConnection = (new self)->getDepartment();
         $query = mysqli_query($getConnection, "DESCRIBE $table ");
         if ($query) {
 
-            $aa = $this->ArrColumnName($table);
+            $aa = (new self)->ArrColumnName($table);
             $bb = array_keys($tablestruktur);
 
             if (count($aa) > count($bb)) {
                 foreach ($aa as $ay => $ax) {
                     if (in_array($ax, $bb)) {
                     }else{
-                        $this->query("
+                        (new self)->query("
                             ALTER TABLE ".$table."
                             DROP COLUMN ".$ax.";
                         ");
@@ -111,19 +132,19 @@ class Database extends Settings {
             }else{
                 $no = 1;
                 foreach ($tablestruktur as $key => $value) {
-                    if ($this->cekColumn($table, $no) == 0) {
-                        $this->query("
+                    if ((new self)->cekColumn($table, $no) == 0) {
+                        (new self)->query("
                             
                             ALTER TABLE ".$table."
                             ADD ".$key." ".$value.";
 
                         ");
                     }else{
-                        if ($this->getColumnName($table, $no) != $key) {
-                            $this->query("
+                        if ((new self)->getColumnName($table, $no) != $key) {
+                            (new self)->query("
                             
                                 ALTER TABLE ".$table."
-                                CHANGE COLUMN ".$this->getColumnName($table, $no)." ".$key." ".$value.";
+                                CHANGE COLUMN ".(new self)->getColumnName($table, $no)." ".$key." ".$value.";
 
                             ");
                         }
@@ -131,12 +152,9 @@ class Database extends Settings {
                     $no++;
                 }
             }
-
             return 'tersedia';
         }else{
-
             $mystructure = "";
-
             $no = 0;
             foreach ($tablestruktur as $key => $value) {
                 if ($no == 0) {
@@ -157,17 +175,17 @@ class Database extends Settings {
 
 
     // query data ke database
-    public function query($e)
+    public static function query($e)
     {
-        $conn = $this->getDepartment();
+        $conn = (new self)->getDepartment();
         $query = mysqli_query($conn, $e);
         return $query;
     }
 
     // ambuil data secara objek
-    public function query_result_object($e)
+    public static function query_result_object($e)
     {
-        $conn = $this->getDepartment();
+        $conn = (new self)->getDepartment();
         $query = mysqli_query($conn, $e);
         $box = [];
         while ($data = mysqli_fetch_object($query) ) {
@@ -176,9 +194,9 @@ class Database extends Settings {
         return $box;
     }
 
-    public function query_result_object_row($e)
+    public static function query_result_object_row($e)
     {
-        $conn = $this->getDepartment();
+        $conn = (new self)->getDepartment();
         $query = mysqli_query($conn, $e);
         $box = [];
         while ($data = mysqli_fetch_object($query) ) {
@@ -188,9 +206,28 @@ class Database extends Settings {
     }
 
     // ambil data secara arrray 
-    public function query_result_assoc($e)
+
+    public function query_result_array($e)
     {
-        $conn = $this->getDepartment();
+        $conn = (new self)->getDepartment();
+        $query = mysqli_query($conn, $e);
+        $box = [];
+        while ($data = mysqli_fetch_array($query) ) {
+            $box[] = $data;
+        }
+        return $box;
+    }
+
+
+    public function get_table($table='')
+    {
+        return (new self)->query_result_array("SELECT * FROM `".$table."`");
+    }
+
+
+    public static function query_result_assoc($e)
+    {
+        $conn = (new self)->getDepartment();
         $query = mysqli_query($conn, $e);
         $box = [];
         while ($data = mysqli_fetch_assoc($query) ) {
@@ -199,9 +236,9 @@ class Database extends Settings {
         return $box;
     }
     // hitung total query data
-    public function count_query($e)
+    public static function count_query($e)
     {
-        $conn = $this->getDepartment();
+        $conn = (new self)->getDepartment();
         $query = mysqli_query($conn, $e);
         $box = [];
         while ($data = mysqli_fetch_object($query) ) {
@@ -210,7 +247,7 @@ class Database extends Settings {
         return count($box);
     }
     // nah ini rumusnya tadi 
-    public function sql_like_table($arr, $search){
+    public static function sql_like_table($arr, $search){
         $table_row_data = "";
         $table_row_data .= "(";
         foreach ($arr as $key => $value) {
@@ -224,7 +261,7 @@ class Database extends Settings {
         return $table_row_data;
     }
 
-    public function sql_order_table($arr, $order){
+    public static function sql_order_table($arr, $order){
         if ($order != "") {
             $columnName = "";
             foreach ($arr as $key => $nilaicolumn) {
@@ -241,8 +278,8 @@ class Database extends Settings {
         return $order;
     }
 
-    public function sql_save_query($table, $data_arr){
-        $conn = $this->getDepartment();
+    public static function sql_save_query($table, $data_arr){
+        $conn = (new self)->getDepartment();
 
         $data = "data saya ok";
         $keys = array_keys($data_arr);
@@ -272,8 +309,8 @@ class Database extends Settings {
         return $query;
     }
 
-    public function sql_update_query($table, $data_arr, $where){
-        $conn = $this->getDepartment();
+    public static function sql_update_query($table, $data_arr, $where){
+        $conn = (new self)->getDepartment();
 
         $data = "data saya ok";
         $keys = array_keys($data_arr);
@@ -301,8 +338,8 @@ class Database extends Settings {
         return $query;
     }
 
-    public function sql_delete_query($table, $where){
-        $conn = $this->getDepartment();
+    public static function sql_delete_query($table, $where){
+        $conn = (new self)->getDepartment();
         $keys2 = array_keys($where);
         $argument = " WHERE ";
         for ($y=0; $y < count($where); $y++) { 

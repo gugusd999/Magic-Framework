@@ -7,7 +7,6 @@ class home extends Magic
 	
 	function index()
 	{
-	
 		// ok ini adalah variable untuk nama table terserah mau dinamai apa
 		$table = $this->table_saya;
 		$struktur = array(
@@ -19,7 +18,7 @@ class home extends Magic
 
 		// cek table 2 paramater namatable dan struktur table
 
-		$cek = $this->db()->cekTable($table, $struktur);
+		$cek = DB::cekTable($table, $struktur);
 		if ($cek == 'dibuat' || $cek == 'tersedia') {
 			$this->getPages('home', 'home');
 		}
@@ -34,16 +33,16 @@ class home extends Magic
 		$table_row = array('id', 'data1', 'data2', 'keterangan');
 		$dataColumn = array(false,"data1","data2", 'keterangan');
 		// sql like db digunakan untuk pencarian table atau filter table rumus ini saya tanamkan di database class
-		$table_row_data = $this->db()->sql_like_table($table_row, $search);
+		$table_row_data = DB::sql_like_table($table_row, $search);
 
 		if (isset($_POST['order'])): $setorder = $_POST['order']; else: $setorder = ""; endif;
 
-		$order = $this->db()->sql_order_table($dataColumn, $setorder);
+		$order = DB::sql_order_table($dataColumn, $setorder);
 
 		$limitStart = $_POST["start"];
 		$limitEnd = $_POST["length"];
-		$countData = $this->db()->count_query("SELECT * FROM $table");
-		$getData = $this->db()->query_result_object("SELECT * FROM $table WHERE $table_row_data $order LIMIT $limitStart, $limitEnd");
+		$countData = DB::count_query("SELECT * FROM $table");
+		$getData = DB::query_result_object("SELECT * FROM $table WHERE $table_row_data $order LIMIT $limitStart, $limitEnd");
 		$dataArr = array();
 		$no = intval($_POST['start']);
 		foreach ($getData as $key => $value) {
@@ -57,7 +56,7 @@ class home extends Magic
 				 <a data-id="'.$value->id.'" class="btn btn-danger hapus">hapus</a>'
 			));
 		}
-
+		
 		$r = array(
 			"draw"            => $_POST['draw'],
             "recordsTotal"    => intval( $countData ),
@@ -82,17 +81,11 @@ class home extends Magic
 
 		var_dump($arr);
 
-		$simpan = $this->db()->sql_save_query($table, $arr);
+		$simpan = DB::sql_save_query($table, $arr);
 		if ($simpan) {
 			redirect('home');
 		}
 	}
-
-
-
-
-
-// edit ambil data
 
 	function edit($id){
 		$data['id'] = $id;
@@ -112,9 +105,7 @@ class home extends Magic
 			"id" => $_POST['id']
 		);
 
-		var_dump($arr);
-
-		$simpan = $this->db()->sql_update_query($table, $arr, $go);
+		$simpan = DB::sql_update_query($table, $arr, $go);
 		if ($simpan) {
 			redirect('home');
 		}
@@ -127,7 +118,7 @@ class home extends Magic
 		$go = array(
 			"id" => $_POST['id']
 		);
-		$hapus = $this->db()->sql_delete_query($table, $go);
+		$hapus = DB::sql_delete_query($table, $go);
 
 		if ($hapus) {
 			echo "success";

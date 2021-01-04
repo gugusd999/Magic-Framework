@@ -1,7 +1,3 @@
-*{
-    padding: 0;
-    margin: 0;
-}
 
 @font-face {
     font-family: "ColabBol";
@@ -13,7 +9,11 @@
     src: url('../font/JosefinSans-Regular.ttf');
 }
 
-
+*{
+    padding: 0;
+    margin: 0;
+    font-family: josefin;
+}
 
 .container-grid .grid-items:nth-child(1){
     grid-area: header;
@@ -170,4 +170,9 @@
 
 .margin-top-20{
     margin-top: 20px;
+}
+
+.fa-ex{
+    font-size: 10vw;
+    font-min-size: 25px;
 }

@@ -15,12 +15,8 @@ class penggunaan_database extends Magic
 		$this->getPages('penggunaan_database', $pages);
 	}
 
-
-
 	function penggunaan_cek_table(){
-		
 		$nama_tabel = "test";
-
 		$struktur = array(
 			"id" => "INT(11) AUTO_INCREMENT PRIMARY KEY",
 			"data1" => "VARCHAR(50)",
@@ -28,7 +24,7 @@ class penggunaan_database extends Magic
 			"data4" => "VARCHAR(100)",
 		);
 
-		$cek = $this->db()->cekTable($nama_tabel, $struktur);
+		$cek = DB::cekTable($nama_tabel, $struktur);
 
 		if ($cek == 'dibuat' || $cek == 'tersedia') {
 				redirect('penggunaan_database/penggunaan_cek_table_show');
@@ -37,7 +33,7 @@ class penggunaan_database extends Magic
 	}
 
 	function penggunaan_cek_table_show(){
-		$queryResult = $this->db()->query_result_object("SELECT * FROM test");
+		$queryResult = DB::query_result_object("SELECT * FROM test");
 		echo "<a href='".$this->site_link('penggunaan_database/')."'>kembali ke tutorial</a>";
 		echo "<br>";
 		echo "<a href='".$this->site_link('penggunaan_database/tambah')."'>tambah</a>";
@@ -62,7 +58,7 @@ class penggunaan_database extends Magic
 			"data1" => "data no 1",
 			"data3" => "data no 2",
 		);
-		$sql_save = $this->db()->sql_save_query($nama_tabel, $data);
+		$sql_save = DB::sql_save_query($nama_tabel, $data);
 		if ($sql_save) {
 			redirect("penggunaan_database/penggunaan_cek_table_show");
 		}
@@ -77,20 +73,18 @@ class penggunaan_database extends Magic
 		$go = array(
 			"id" => $id
 		);
-		$sql_save = $this->db()->sql_update_query($nama_tabel, $data, $go);
+		$sql_save = DB::sql_update_query($nama_tabel, $data, $go);
 		if ($sql_save) {
 			redirect("penggunaan_database/penggunaan_cek_table_show");
 		}
 	}
-
-
 
 	function hapus($id){
 		$nama_tabel = "test";
 		$arr = array(
 			"id" => $id
 		);
-		$hapus = $this->db()->sql_delete_query($nama_tabel, $arr);
+		$hapus = DB::sql_delete_query($nama_tabel, $arr);
 		if ($hapus) {
 			redirect("penggunaan_database/penggunaan_cek_table_show");
 		}

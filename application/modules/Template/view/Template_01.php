@@ -8,8 +8,8 @@
     <title>Magic</title>
 	<link rel="stylesheet" href="<?= $this->base_link('assets/bootstrap/css/bootstrap.min.css'); ?>">
 	<link rel="stylesheet" href="<?= $this->base_link('assets/datatable/dataTables.bootstrap.min.css'); ?>">
-	<link rel="stylesheet" href="<?= $this->base_link('assets/master-grid/master-grid.css') ?>">	
-	<link rel="stylesheet" href="<?= $this->base_link('assets/card/card.css')  ?>">
+	<link rel="stylesheet" href="<?= $this->base_link('assets/master-grid/master-grid.css?v=1') ?>">	
+	<link rel="stylesheet" href="<?= $this->base_link('assets/font-awesome/css/all.css')  ?>">
 </head>
 	<script src="<?= $this->base_link() ?>assets/jquery/jquery.js"></script>
 	<script src="<?= $this->base_link('assets/bootstrap/js/bootstrap.min.js'); ?>"></script>
@@ -26,11 +26,6 @@
 			"menu" => "Dashboard",
 			"icon" => "glyphicon glyphicon-heart",
 			"link" => $this->site_link('Wellcome')
-		),
-		array(
-			"menu" => "Setting",
-			"icon" => "glyphicon glyphicon-heart",
-			"link" => $this->site_link('i_setting')
 		),
 		array(
 			"menu" => "Buat Halaman",
@@ -51,6 +46,16 @@
 			"menu" => "Fungsi Tambahan",
 			"icon" => "glyphicon glyphicon-heart",
 			"link" => $this->site_link('fungsi_lain')
+		),
+		array(
+			"menu" => "Sosmed",
+			"icon" => "glyphicon glyphicon-heart",
+			"link" => $this->site_link('admin_sosmed')
+		),
+		array(
+			"menu" => "Setting",
+			"icon" => "glyphicon glyphicon-heart",
+			"link" => $this->site_link('admin_setting')
 		)
 	); ?>
 	<div class="grid-items bg-silver shadow">

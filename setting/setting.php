@@ -3,18 +3,18 @@
 // this use MSQLI for database and Got The Magic no create db just create db on this sintax
 
 // make better experiens with Magic
-
+session_start();
 
 class Settings
 {
 	// namaApps sama dengan nama Folder
-	public $namaApss = "Magic-Framework";
+	public $namaApss = "standard";
 	// set yuo host ................:
 	public $host = "localhost";
 	// set yuo username ................:
     public $user = "root";
 	// set yuo password ................:
-    public $pass = "password";
+    public $pass = "";
 	// set yuo database ................:
     public $db = "Magic";
     // encripsi

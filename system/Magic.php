@@ -1,14 +1,23 @@
 <?php 
 
 require_once 'system/database.php';
+require_once 'system/Session.php';
+require_once 'system/String.php';
 
 class Magic extends Settings{
-	
-	public function test(){
-		echo "string";
+
+	function __construct(){
+		Session::put();
 	}
 	
+	public $db;
+
+	public static function map(){
+		echo "peta data";
+	}
+
 	public function getPages($lokasi,$a, $data = ""){
+    	Session::put('datasementara', $data);
     	require 'application/modules/'.$lokasi.'/view/'.$a.'.php';
     }
 
@@ -25,7 +34,6 @@ class Magic extends Settings{
 		}
 		return false;
 	}
-
 
     public function base_link($a = "")
     {
@@ -54,18 +62,15 @@ class Magic extends Settings{
     	}
 		$getHost = $_SERVER['HTTP_HOST'];
 		$getNameApp = $this->namaApss;
-		$theLink = $getProtokol.$getHost.'/'.$getNameApp.'/index.php?key='.$a;
+			$theLink = $getProtokol.$getHost.'/'.$getNameApp.'/'.$a;
 		return $theLink;
     }
 
     function templates($lokasi, $template , $lokasiHalaman="", $halaman = "", $data = "")
     {
+    	Session::put('datasementara', $data);
     	require 'application/modules/'.$lokasi.'/view/'.$template.'.php'; 
     }
-
-    function session(){
-		session_start();
-	}
 
 	function query_cek($x){
 		if ($x) {
@@ -78,10 +83,6 @@ class Magic extends Settings{
 	function load(){
 		require_once 'system/load.php';
 		return new load;
-	}
-
-	function db(){
-		return new Database;
 	}
 
 
@@ -169,6 +170,6 @@ function redirect($a){
 	// pangggil hostname
 	$getHost = $_SERVER['HTTP_HOST'];
 	$getNameApp = $data->namaApss;
-	$theLink = $getProtokol.$getHost.'/'.$getNameApp.'/index.php?key='.$a;
+	$theLink = $getProtokol.$getHost.'/'.$getNameApp.'/'.$a;
 	header("location: $theLink ");
 }

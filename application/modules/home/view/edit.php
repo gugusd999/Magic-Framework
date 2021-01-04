@@ -24,7 +24,7 @@
 				<hr>
 			</div>
 			<div class="col-sm-8 col-sm-offset-2">
-				<?php $dapatkan_data =  $this->db()->query_result_object_row('SELECT * FROM contoh WHERE id = "'.$data['id'].'"'); ?>
+				<?php $dapatkan_data =  DB::query_result_object_row('SELECT * FROM contoh WHERE id = "'.$data['id'].'"'); ?>
 				<form action="<?= $this->site_link('home/update'); ?>" method="post">
 					<div class="form-group">
 						<label for="data1">Data 1</label>
