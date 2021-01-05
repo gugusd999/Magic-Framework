@@ -6,7 +6,8 @@ require_once 'system/Magic.php';
 
 $seturi = new Magic();
 
-$uri = $_SERVER["REQUEST_URI"];
+
+$uri = str_replace("?", "/?", $_SERVER["REQUEST_URI"]);
 
 if (isset($uri)) {
 	$getUri = $uri;
@@ -26,7 +27,7 @@ if (isset($uri)) {
  		}
 	}
 	if (isset($expUri[0]) && $expUri[0] != "") {
-		$getClass = $expUri[0];
+		$getClass = str_replace("-", "_", $expUri[0]);
 		unset($expUri[0]);
 	}
 	if (isset($expUri[1])) {
@@ -41,24 +42,43 @@ if (isset($uri)) {
 }
 
 
-include_once 'application/modules/'.$getClass.'/controller/'.$getClass.'.php';
+if (file_exists('application/modules/'.$getClass.'/controller/'.$getClass.'.php')) {
+	include_once 'application/modules/'.$getClass.'/controller/'.$getClass.'.php';
+	$x = $getClass;
+	$a = new $x();
+	$b = $getFunction;
+	$c = $getParams;
 
-$x = $getClass;
-$a = new $x();
-$b = $getFunction;
-$c = $getParams;
+	$ckdbn = new Settings;
 
-$ckdbn = new Settings;
-
-if ($ckdbn->host != "" && $ckdbn->user != "") {
-	$loadApps = new DB();
-	$loadAppsCek = $loadApps->cekDatbase();
-	if ($loadAppsCek == 'dibuat' || $loadAppsCek == 'tersedia') {
-		call_user_func_array(array($a, $b), $c);
+	if ($ckdbn->host != "" && $ckdbn->user != "") {
+		$loadApps = new DB();
+		$loadAppsCek = $loadApps->cekDatbase();
+		if ($loadAppsCek == 'dibuat' || $loadAppsCek == 'tersedia') {
+			if (is_callable(array($a, $b))) {
+		    	call_user_func_array(array($a, $b), $c);
+			    	# code...
+		    }else{
+				include_once 'system/404.php';
+		    }    
+		
+		}else{
+			include_once 'system/error.php';
+		}
 	}else{
-		include_once 'system/error.php';
+		try {
+		    $response = call_user_func_array(array($a, $b), $c);
+
+		    if (false === $response) {
+		        throw new \RuntimeException("call_user_func_array failed");
+		    }
+		} catch (\Exception $e) {
+			include_once 'system/404.php';
+		}
 	}
 }else{
-		call_user_func_array(array($a, $b), $c);
+	include_once 'system/404.php';
 }
+
+
 

@@ -19,7 +19,7 @@
 			</div>
 		<?php endif ?>
 		<?php Session::del('pesan'); ?>
-		<form action="<?= $this->site_link('admin_setting/simpan'); ?>" method="post" enctype="multipart/formdata">
+		<form action="<?= $this->site_link('admin_setting/simpan'); ?>" method="get" enctype="multipart/formdata">
 			<input type="hidden" name="nama" value="<?= $data['nama'] ?>">
 			<div class="form-group">
 				<label for="">Nama</label>
