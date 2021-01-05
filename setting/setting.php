@@ -8,7 +8,7 @@ session_start();
 class Settings
 {
 	// namaApps sama dengan nama Folder
-	public $namaApss = "standard";
+	public $namaApss = "standard/";
 	// set yuo host ................:
 	public $host = "localhost";
 	// set yuo username ................:

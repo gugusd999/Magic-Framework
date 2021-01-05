@@ -13,7 +13,7 @@ if (isset($uri)) {
 	$expUri = [];
 	$aes = explode("/", $getUri);
 	if ($seturi->namaApss != "") {
-		$aes = explode($seturi->namaApss."/", $getUri);
+		$aes = explode($seturi->namaApss, $getUri);
 	}
 
 	foreach($aes as $key => $val){

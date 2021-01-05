@@ -48,7 +48,7 @@ class Magic extends Settings{
 		// pangggil hostname
 		$getHost = $_SERVER['HTTP_HOST'];
 		$getNameApp = $this->namaApss;
-		$theLink = $getProtokol.$getHost.'/'.$getNameApp.'/'.$a;
+		$theLink = $getProtokol.$getHost.'/'.$getNameApp.$a;
 		return $theLink;
     }
 
@@ -62,7 +62,7 @@ class Magic extends Settings{
     	}
 		$getHost = $_SERVER['HTTP_HOST'];
 		$getNameApp = $this->namaApss;
-			$theLink = $getProtokol.$getHost.'/'.$getNameApp.'/'.$a;
+			$theLink = $getProtokol.$getHost.'/'.$getNameApp.$a;
 		return $theLink;
     }
 
@@ -170,6 +170,6 @@ function redirect($a){
 	// pangggil hostname
 	$getHost = $_SERVER['HTTP_HOST'];
 	$getNameApp = $data->namaApss;
-	$theLink = $getProtokol.$getHost.'/'.$getNameApp.'/'.$a;
+	$theLink = $getProtokol.$getHost.'/'.$getNameApp.$a;
 	header("location: $theLink ");
 }
